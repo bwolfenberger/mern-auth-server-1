@@ -3,11 +3,9 @@ const db = require('../../models')
 const authLockedRoute = require('./authLockedRoute')
 
 
-// GET - /jobs - user id and jobId in body
-// probably won't use this because jobs are embedded docs
+// GET - /jobs - get all jobs for the user associated with the token
 router.get('/', authLockedRoute, (req,res) => {
-    let i = res.locals.user.jobs.findIndex(job => job._id == req.body.jobId)
-    res.json({ job: res.locals.user.jobs[i] })
+    res.json({ jobs: res.locals.user.jobs})
 })
 
 //POST - /jobs - new job in body, jwt token in auth headers
