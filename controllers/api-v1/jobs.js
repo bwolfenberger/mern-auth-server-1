@@ -16,7 +16,7 @@ router.post('/', authLockedRoute, async (req,res) => {
         res.locals.user.jobs.push(req.body.job)
         console.log(res.locals.user.jobs)
         await res.locals.user.save()
-        res.json({ msg: `job ${req.body.jobId} successfully created` })
+        res.json({ msg: `job ${res.locals.user.jobs[res.locals.user.jobs.length-1]._id} successfully created` })
     } catch(err) {
         console.log(err)
         res.status(500).json({ msg: 'internal server error '})
@@ -31,7 +31,7 @@ router.put('/', authLockedRoute, async (req,res) => {
         let i = res.locals.user.jobs.findIndex(job => job._id == req.body.job._id)
         res.locals.user.jobs[i] = req.body.job
         await res.locals.user.save()
-        res.json({msg: `job ${req.body.jobId} successfully updated`})
+        res.json({msg: `job ${req.body.job._id} successfully updated`})
     } catch(err){
         console.log(err)
         res.status(500).json({ msg: 'internal server error' })
