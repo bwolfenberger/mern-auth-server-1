@@ -14,7 +14,7 @@ router.post('/', authLockedRoute, async (req,res) => {
         res.locals.user.jobs.push(req.body.job)
         console.log(res.locals.user.jobs)
         await res.locals.user.save()
-        res.json({ msg: `job ${res.locals.user.jobs[res.locals.user.jobs.length-1]._id} successfully created` })
+        res.json({ job: res.locals.user.jobs[res.locals.user.jobs.length-1] })
     } catch(err) {
         console.log(err)
         res.status(500).json({ msg: 'internal server error '})
