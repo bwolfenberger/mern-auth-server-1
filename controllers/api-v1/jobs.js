@@ -22,10 +22,8 @@ router.post('/', authLockedRoute, async (req,res) => {
 })
 
 // PUT - /jobs - update job. job in body, token in headers
-// might need to change so I don't overwrite mongoose timestamps.
 router.put('/', authLockedRoute, async (req,res) => {
     try {
-        // TODO: maybe fix strict equality check? 
         let i = res.locals.user.jobs.findIndex(job => job._id == req.body.job._id)
         res.locals.user.jobs[i] = req.body.job
         await res.locals.user.save()
