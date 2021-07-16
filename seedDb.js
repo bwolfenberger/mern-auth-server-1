@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken')
 db.connect()
 
 const seedDb = async () => {
+    let today = new Date().toISOString().split('T')[0]
     try {
         const testJobs = [{
             title: 'CEO',
@@ -13,7 +14,7 @@ const seedDb = async () => {
             jobURL: 'www.Amazon/jobs/324',
             description: 'Body copy 18, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
             notes: 'Interviewer was nice and we talked about visiting the Amazon',
-            dateApplied: new Date().toDateString(),
+            dateApplied: today,
             priority: 'High',
             status: 'Applied',
             createdAt: new Date(),
@@ -25,7 +26,7 @@ const seedDb = async () => {
             jobURL: 'www.starbucks/jobs/32324',
             description: 'Body copy 18, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
             notes: 'We talked about my skills in css and our love for coffee',
-            dateApplied:  new Date().toDateString(),
+            dateApplied:  today,
             priority: 'Medium',
             status: 'Interviewed',
             createdAt: new Date(),
@@ -37,7 +38,7 @@ const seedDb = async () => {
             jobURL: 'www.Microsoft/careers/3324',
             description: 'Body copy 18, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
             notes: 'Applied with my designer resume',
-            dateApplied:  null,
+            dateApplied:  '',
             priority: 'Low',
             status: 'To Apply',
             createdAt: new Date(),
@@ -49,7 +50,7 @@ const seedDb = async () => {
             jobURL: 'www.Netflix/careers/3324',
             description: 'Body copy 18, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
             notes: 'Applied with my designer resume',
-            dateApplied:  null,
+            dateApplied:  '',
             priority: 'High',
             status: 'To Apply',
             createdAt: new Date(),
@@ -61,7 +62,7 @@ const seedDb = async () => {
             jobURL: 'www.walmart/careers/3324',
             description: 'Body copy 18, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
             notes: 'Applied with my designer resume',
-            dateApplied:  new Date().toDateString(),
+            dateApplied:  today,
             priority: 'Low',
             status: 'Rejected',
             createdAt: new Date(),
@@ -73,7 +74,7 @@ const seedDb = async () => {
             jobURL: 'www.KPMG/careers/3324',
             description: 'Body copy 18, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
             notes: 'Applied with my designer resume',
-            dateApplied:  new Date().toDateString(),
+            dateApplied:  today,
             priority: 'Low',
             status: 'Applied',
             createdAt: new Date(),
@@ -109,11 +110,11 @@ const seedDb = async () => {
             },
         ]
 
-        await db.User.insertMany(testUsers)
+       await db.User.insertMany(testUsers)
 
-        let count = db.User.count({})
+        let count = await db.User.countDocuments({})
         console.log(`db seeded with ${count} users`)
-
+        process.exit()
     } catch(err) {
         console.log(err)
     }
