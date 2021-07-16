@@ -6,7 +6,7 @@ const JobSchema = new mongoose.Schema({
     jobURL: String,
     description: String,
     notes: String,
-    dateApplied: Date,
+    dateApplied: String,
     priority: String,
     status: String,
     reminder: Date
